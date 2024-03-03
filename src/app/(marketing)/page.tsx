@@ -1,4 +1,5 @@
 import Logo from "@/components/logo";
+import { Button } from "@/components/ui/button";
 import Image from "next/image";
 
 export default function Home() {
@@ -22,7 +23,10 @@ export default function Home() {
           Lorem ipsum dolor sit amet consectetur, adipisicing elit.
           Dolores debitis enim ea ullam architecto unde quo.
         </p>
-        <div className="mt-10"></div>
+        <div className="mt-10 space-x-3">
+          <Button>Get Started</Button>
+          <Button variant="secondary">Log in</Button>
+        </div>
       </div>
     </main>
   );
