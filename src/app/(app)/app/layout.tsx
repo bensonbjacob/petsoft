@@ -10,9 +10,11 @@ export default function Layout({
   return (
     <>
       <BackgroundPattern />
-      <AppHeader />
-      {children}
-      <AppFooter />
+      <div className="max-w-[1050px] mx-auto px-4">
+        <AppHeader />
+        {children}
+        <AppFooter />
+      </div>
     </>
   );
 }
