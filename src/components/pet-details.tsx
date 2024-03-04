@@ -9,7 +9,7 @@ export default function PetDetails() {
 
   return (
     <section className="flex flex-col h-full w-full">
-      <div className="flex items-center bg-white px-8 py-5 border-b border-black/[0.08]">
+      <div className="flex items-center bg-white px-8 py-5 border-b border-light">
         <Image
           src={selectedPet?.imageUrl}
           alt="selected pet image"
@@ -42,7 +42,7 @@ export default function PetDetails() {
         </div>
       </div>
 
-      <section className="bg-white px-7 py-5 rounded-md mb-9 mx-8 flex-1 border border-black/[0.08]">
+      <section className="bg-white px-7 py-5 rounded-md mb-9 mx-8 flex-1 border border-light">
         {selectedPet?.notes}
       </section>
     </section>
