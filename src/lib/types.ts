@@ -1,7 +1,7 @@
 export type Pet = {
   id: string;
   name: string;
-  owner: string;
+  ownerName: string;
   imageUrl: string;
   age: number;
   notes: string;
