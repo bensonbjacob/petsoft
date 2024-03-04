@@ -15,9 +15,9 @@ export default function PetList() {
           <button
             onClick={() => handleChangeSelectedPetId(pet.id)}
             className={cn(
-              "flex h-[70px] cursor-pointer w-full items-center px-5 text-base gap-3 hover:bg-[#eff1f2] focus:bg-[#eff1f2] transition",
+              "flex items-center h-[70px] w-full cursor-pointer px-5 text-base gap-3 hover:bg-[#EFF1F2] focus:bg-[#EFF1F2] transition",
               {
-                "bg-[#eff1f2]": selectedPetId === pet.id,
+                "bg-[#EFF1F2]": selectedPetId === pet.id,
               }
             )}>
             <Image
