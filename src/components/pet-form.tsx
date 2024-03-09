@@ -6,6 +6,7 @@ import { Textarea } from "./ui/textarea";
 import { Button } from "./ui/button";
 import { usePetContext } from "@/lib/hooks";
 import { addPet } from "@/actions/actions";
+import PetFormBTN from "./pet-form-btn";
 
 type PetFormProps = {
   actionType: "add" | "edit";
@@ -96,9 +97,7 @@ export default function PetForm({
         </div>
       </div>
 
-      <Button className="mt-5 self-end" type="submit">
-        {actionType === "add" ? "Add" : "Update"}
-      </Button>
+      <PetFormBTN actionType={actionType} />
     </form>
   );
 }
