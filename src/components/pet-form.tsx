@@ -7,6 +7,7 @@ import { Button } from "./ui/button";
 import { usePetContext } from "@/lib/hooks";
 import { addPet } from "@/actions/actions";
 import PetFormBTN from "./pet-form-btn";
+import { toast } from "sonner";
 
 type PetFormProps = {
   actionType: "add" | "edit";
@@ -22,7 +23,12 @@ export default function PetForm({
   return (
     <form
       action={async (formData) => {
-        await addPet(formData);
+        const error = await addPet(formData);
+        if (error) {
+          toast.warning(error.message);
+          return;
+        }
+
         onFormSubmission();
       }}
       className="flex flex-col">
