@@ -3,7 +3,6 @@
 import { usePetContext } from "@/lib/hooks";
 import Image from "next/image";
 import PetButton from "./pet-button";
-import { deletePet } from "@/actions/actions";
 import { Pet } from "@prisma/client";
 import { useTransition } from "react";
 
@@ -62,11 +61,7 @@ function TopBar({ pet }: Props) {
         <PetButton
           actionType="checkout"
           disabled={isPending}
-          onClick={async () => {
-            startTransition(async () => {
-              await deletePet(pet.id);
-            });
-          }}>
+          onClick={async () => await handleCheckoutPet(pet.id)}>
           Checkout
         </PetButton>
       </div>
