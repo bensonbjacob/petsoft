@@ -14,15 +14,7 @@ type PetFormProps = {
   onFormSubmission: () => void;
 };
 
-type TPetForm = {
-  name: string;
-  ownerName: string;
-  imageUrl: string;
-  age: number;
-  notes: string;
-};
-
-const petFormScheme = z.object({
+const petFormSchema = z.object({
   name: z
     .string()
     .trim()
@@ -41,6 +33,8 @@ const petFormScheme = z.object({
   notes: z.union([z.literal(""), z.string().trim().max(1000)]),
 });
 
+type TPetForm = z.infer<typeof petFormSchema>;
+
 export default function PetForm({
   actionType,
   onFormSubmission,
@@ -53,7 +47,7 @@ export default function PetForm({
     trigger,
     formState: { isSubmitting, errors },
   } = useForm<TPetForm>({
-    resolver: zodResolver(petFormScheme),
+    resolver: zodResolver(petFormSchema),
   });
 
   return (
