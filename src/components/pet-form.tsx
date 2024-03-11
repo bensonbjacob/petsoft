@@ -29,12 +29,15 @@ export default function PetForm({
 
   const {
     register,
+    trigger,
     formState: { isSubmitting, errors },
   } = useForm<TPetForm>();
 
   return (
     <form
       action={async (formData) => {
+        const result = await trigger();
+        if (!result) return;
         onFormSubmission();
 
         const petData = {
@@ -57,7 +60,16 @@ export default function PetForm({
       <div className="space-y-3">
         <div className="space-y-1">
           <Label htmlFor="name">Name</Label>
-          <Input id="name" {...register("name")} />
+          <Input
+            id="name"
+            {...register("name", {
+              required: "Name is required",
+              minLength: {
+                value: 2,
+                message: "Name should be at least 2 characters",
+              },
+            })}
+          />
           {errors.name && (
             <p className="text-red-500">{errors.name.message}</p>
           )}
@@ -65,7 +77,16 @@ export default function PetForm({
 
         <div className="space-y-1">
           <Label htmlFor="ownerName">Owner name</Label>
-          <Input id="ownerName" {...register("ownerName")} />
+          <Input
+            id="ownerName"
+            {...register("ownerName", {
+              required: "Owner name is required",
+              maxLength: {
+                value: 35,
+                message: "Owner name should be at most 35 characters",
+              },
+            })}
+          />
           {errors.ownerName && (
             <p className="text-red-500">{errors.ownerName.message}</p>
           )}
