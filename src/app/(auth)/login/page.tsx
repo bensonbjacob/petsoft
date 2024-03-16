@@ -9,7 +9,7 @@ export default function Login() {
 
       <AuthForm />
 
-      <p className="mt-6 text-sm text-zinc-500">
+      <p className="mt-6 text-sm text-zinc-500 text-right">
         No account yet?{" "}
         <Link href="/signup" className="font-medium">
           Sign up
