@@ -35,7 +35,6 @@ const userData: Prisma.UserCreateInput = {
       },
     ],
   },
-  password: "",
 };
 
 async function main() {
