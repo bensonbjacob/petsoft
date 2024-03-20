@@ -6,6 +6,7 @@ import { petFormSchema, petIdSchema } from "@/lib/validations";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import bcrypt from "bcryptjs";
+import { checkAuth } from "@/lib/server-utils";
 
 // User actions
 
@@ -37,10 +38,7 @@ export async function logOut() {
 // Pet actions
 
 export async function addPet(pet: unknown) {
-  const session = await auth();
-  if (!session?.user) {
-    redirect("/login");
-  }
+  const session = await checkAuth();
 
   const validatedPet = petFormSchema.safeParse(pet);
   if (!validatedPet.success) {
