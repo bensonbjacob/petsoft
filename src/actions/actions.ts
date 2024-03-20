@@ -1,6 +1,6 @@
 "use server";
 
-import { auth, signIn, signOut } from "@/lib/auth";
+import { signIn, signOut } from "@/lib/auth";
 import prisma from "@/lib/db";
 import { petFormSchema, petIdSchema } from "@/lib/validations";
 import { revalidatePath } from "next/cache";
@@ -69,10 +69,7 @@ export async function addPet(pet: unknown) {
 
 export async function editPet(petId: unknown, newPetData: unknown) {
   // Authentication Check
-  const session = await auth();
-  if (!session?.user) {
-    redirect("/login");
-  }
+  const session = await checkAuth();
 
   // Validation
   const validatedPetId = petIdSchema.safeParse(petId);
@@ -123,10 +120,7 @@ export async function editPet(petId: unknown, newPetData: unknown) {
 
 export async function deletePet(petId: unknown) {
   // Authentication Check
-  const session = await auth();
-  if (!session?.user) {
-    redirect("/login");
-  }
+  const session = await checkAuth();
 
   //Validation
   const validatedPetId = petIdSchema.safeParse(petId);
