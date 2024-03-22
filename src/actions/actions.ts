@@ -1,6 +1,6 @@
 "use server";
 
-import { signIn, signOut } from "@/lib/auth";
+import { auth, signIn, signOut } from "@/lib/auth";
 import prisma from "@/lib/db";
 import {
   authSchema,
@@ -26,14 +26,29 @@ export async function logIn(formData: unknown) {
   redirect("/app/dashboard");
 }
 
-export async function signUp(formData: FormData) {
-  const hashedPassword = await bcrypt.hash(
-    formData.get("password") as string,
-    10
-  );
+export async function signUp(formData: unknown) {
+  // check if formData is an instance of FormData
+  if (!(formData instanceof FormData)) {
+    return {
+      message: "Invalid form data.",
+    };
+  }
+  // convert formData to object
+  const formDataEntries = Object.fromEntries(formData.entries());
+
+  // validate form data
+  const validatedFormData = authSchema.safeParse(formDataEntries);
+  if (!validatedFormData.success) {
+    return {
+      message: "Invalid form data.",
+    };
+  }
+
+  const { email, password } = validatedFormData.data;
+  const hashedPassword = await bcrypt.hash(password, 10);
   await prisma.user.create({
     data: {
-      email: formData.get("email") as string,
+      email,
       hashedPassword,
     },
   });
