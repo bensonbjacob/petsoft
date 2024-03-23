@@ -40,12 +40,8 @@ export async function logIn(prevStat: unknown, formData: unknown) {
         }
       }
     }
-    return {
-      message: "Failed to sign in",
-    };
+    throw error;
   }
-
-  redirect("/app/dashboard");
 }
 
 export async function signUp(prevState: unknown, formData: unknown) {
