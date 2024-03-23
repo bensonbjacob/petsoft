@@ -12,6 +12,7 @@ import { redirect } from "next/navigation";
 import bcrypt from "bcryptjs";
 import { checkAuth, getPetById } from "@/lib/server-utils";
 import { Prisma } from "@prisma/client";
+import { AuthError } from "next-auth";
 
 // User actions
 
@@ -22,7 +23,27 @@ export async function logIn(prevStat: unknown, formData: unknown) {
     };
   }
 
-  await signIn("credentials", formData);
+  try {
+    await signIn("credentials", formData);
+  } catch (error) {
+    if (error instanceof AuthError) {
+      switch (error.type) {
+        case "CredentialsSignin": {
+          return {
+            message: "Invalid credentials",
+          };
+        }
+        default: {
+          return {
+            message: "Failed to sign in",
+          };
+        }
+      }
+    }
+    return {
+      message: "Failed to sign in",
+    };
+  }
 
   redirect("/app/dashboard");
 }
