@@ -15,7 +15,7 @@ import { Prisma } from "@prisma/client";
 
 // User actions
 
-export async function logIn(formData: unknown) {
+export async function logIn(prevStat: unknown, formData: unknown) {
   if (!(formData instanceof FormData)) {
     return {
       message: "Invalid form data",
