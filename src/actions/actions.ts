@@ -27,7 +27,7 @@ export async function logIn(formData: unknown) {
   redirect("/app/dashboard");
 }
 
-export async function signUp(formData: unknown) {
+export async function signUp(prevState: unknown, formData: unknown) {
   // check if formData is an instance of FormData
   if (!(formData instanceof FormData)) {
     return {
