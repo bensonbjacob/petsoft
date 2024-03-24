@@ -2,17 +2,15 @@
 
 import { auth, signIn, signOut } from "@/lib/auth";
 import prisma from "@/lib/db";
-import {
-  authSchema,
-  petFormSchema,
-  petIdSchema,
-} from "@/lib/validations";
+import { authSchema, petFormSchema, petIdSchema } from "@/lib/validations";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import bcrypt from "bcryptjs";
 import { checkAuth, getPetById } from "@/lib/server-utils";
 import { Prisma } from "@prisma/client";
 import { AuthError } from "next-auth";
+
+const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 
 // User actions
 
@@ -208,4 +206,27 @@ export async function deletePet(petId: unknown) {
   }
 
   revalidatePath("/app/", "layout");
+}
+
+// Paymeny actions
+export async function createCheckoutSession() {
+  // Authentication Check
+  const session = await checkAuth();
+
+  // Create a new checkout session
+  const checkoutSession = await stripe.checkout.sessions.create({
+    customer_email: session.user.email,
+    line_items: [
+      {
+        price: "price_1OxtjyCTqsSB68BTlP9Z0z7G",
+        quantity: 1,
+      },
+    ],
+    mode: "payment",
+    success_url: `${process.env.CANONICAL_URL}/payment?success=true`,
+    cancel_url: `${process.env.CANONICAL_URL}/payment?canceled=true`,
+  });
+
+  // Redirect user to checkout page
+  redirect(checkoutSession.url);
 }

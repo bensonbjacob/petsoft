@@ -41,8 +41,7 @@ const config = {
   callbacks: {
     authorized: ({ auth, request }) => {
       const isLoggedIn = Boolean(auth?.user);
-      const isTryingToAccessApp =
-        request.nextUrl.pathname.includes("/app");
+      const isTryingToAccessApp = request.nextUrl.pathname.includes("/app");
 
       if (!isLoggedIn && isTryingToAccessApp) {
         return false;
@@ -53,9 +52,14 @@ const config = {
       }
 
       if (isLoggedIn && !isTryingToAccessApp) {
-        return Response.redirect(
-          new URL("/app/dashboard", request.nextUrl)
-        );
+        if (
+          request.nextUrl.pathname.includes("/login") ||
+          request.nextUrl.pathname.includes("/signup")
+        ) {
+          return Response.redirect(new URL("/payment", request.nextUrl));
+        }
+
+        return true;
       }
 
       if (!isLoggedIn && !isTryingToAccessApp) {
