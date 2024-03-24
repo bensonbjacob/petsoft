@@ -47,7 +47,7 @@ const config = {
         return false;
       }
 
-      if (isLoggedIn && isTryingToAccessApp && auth?.user?.hasAccess) {
+      if (isLoggedIn && isTryingToAccessApp && auth?.user.hasAccess) {
         return true;
       }
 
@@ -70,7 +70,8 @@ const config = {
     },
     jwt: ({ token, user }) => {
       if (user) {
-        token.userId = user.id as string;
+        token.userId = user.id;
+        token.hasAccess = user.hasAccess;
       }
 
       return token;
@@ -78,6 +79,7 @@ const config = {
     session: ({ session, token }) => {
       if (session.user) {
         session.user.id = token.userId;
+        session.user.hasAccess = token.hasAccess;
       }
       return session;
     },
