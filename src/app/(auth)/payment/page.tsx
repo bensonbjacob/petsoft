@@ -22,6 +22,10 @@ export default function Page({ searchParams }) {
       {searchParams.success && (
         <p className="text-sm text-green-700">Payment successful!</p>
       )}
+
+      {searchParams.canceled && (
+        <p className="text-sm text-red-700">Payment canceled.</p>
+      )}
     </main>
   );
 }
