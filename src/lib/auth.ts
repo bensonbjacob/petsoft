@@ -76,7 +76,7 @@ const config = {
     },
     jwt: async ({ token, user, trigger }) => {
       if (user) {
-        token.userId = user.id;
+        token.userId = user.id as string;
         token.email = user.email!;
         token.hasAccess = user.hasAccess;
       }
