@@ -16,17 +16,16 @@ export default function Home() {
       <div>
         <Logo />
         <h1 className="text-5xl font-semibold my-6 max-w-[500px]">
-          Manage with your{" "}
-          <span className="font-extrabold">pet daycare</span> with
+          Manage your <span className="font-extrabold">pet daycare</span> with
           ease
         </h1>
         <p className="text-2xl font-medium max-w-[600px]">
-          Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-          Dolores debitis enim ea ullam architecto unde quo.
+          Use PetSoft to easily keep track of pets under your care. Get lifetime
+          access for $299.
         </p>
         <div className="mt-10 space-x-3">
           <Button asChild>
-            <Link href="/signup">Get Started</Link>
+            <Link href="/signup">Get started</Link>
           </Button>
           <Button asChild variant="secondary">
             <Link href="/login">Log in</Link>

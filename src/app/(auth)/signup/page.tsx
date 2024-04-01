@@ -5,7 +5,7 @@ import Link from "next/link";
 export default function Page() {
   return (
     <main>
-      <H1 className="text-center mb-5">Sign Up</H1>
+      <H1 className="mb-5 text-center">Sign Up</H1>
 
       <AuthForm type="signUp" />
 
