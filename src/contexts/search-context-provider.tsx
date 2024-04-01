@@ -2,7 +2,7 @@
 
 import { createContext, useState } from "react";
 
-type SearchContextProviderProps = {
+type SearchContextProvider = {
   children: React.ReactNode;
 };
 
@@ -11,19 +11,17 @@ type TSearchContext = {
   handleChangeSearchQuery: (newValue: string) => void;
 };
 
-export const SearchContext = createContext<TSearchContext | null>(
-  null
-);
+export const SearchContext = createContext<TSearchContext | null>(null);
 
 export default function SearchContextProvider({
   children,
-}: SearchContextProviderProps) {
-  //state
+}: SearchContextProvider) {
+  // state
   const [searchQuery, setSearchQuery] = useState("");
 
-  //derived state
+  // derived state
 
-  //event handlers
+  // event handlers / actions
   const handleChangeSearchQuery = (newValue: string) => {
     setSearchQuery(newValue);
   };
@@ -33,7 +31,8 @@ export default function SearchContextProvider({
       value={{
         searchQuery,
         handleChangeSearchQuery,
-      }}>
+      }}
+    >
       {children}
     </SearchContext.Provider>
   );
