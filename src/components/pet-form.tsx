@@ -8,7 +8,7 @@ import PetFormBTN from "./pet-form-btn";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { DEFAULT_PET_IMAGE_URL } from "@/lib/constants";
+import { DEFAULT_PET_IMAGE } from "@/lib/constants";
 import { TPetForm, petFormSchema } from "@/lib/validations";
 
 type PetFormProps = {
@@ -20,8 +20,7 @@ export default function PetForm({
   actionType,
   onFormSubmission,
 }: PetFormProps) {
-  const { handleAddPet, handleEditPet, selectedPet } =
-    usePetContext();
+  const { handleAddPet, handleEditPet, selectedPet } = usePetContext();
 
   const {
     register,
@@ -50,7 +49,7 @@ export default function PetForm({
         onFormSubmission();
 
         const petData = getValues();
-        petData.imageUrl = petData.imageUrl || DEFAULT_PET_IMAGE_URL;
+        petData.imageUrl = petData.imageUrl || DEFAULT_PET_IMAGE;
 
         if (actionType === "add") {
           await handleAddPet(petData);
@@ -58,14 +57,13 @@ export default function PetForm({
           await handleEditPet(selectedPet!.id, petData);
         }
       }}
-      className="flex flex-col">
+      className="flex flex-col"
+    >
       <div className="space-y-3">
         <div className="space-y-1">
           <Label htmlFor="name">Name</Label>
           <Input id="name" {...register("name")} />
-          {errors.name && (
-            <p className="text-red-500">{errors.name.message}</p>
-          )}
+          {errors.name && <p className="text-red-500">{errors.name.message}</p>}
         </div>
 
         <div className="space-y-1">
@@ -87,9 +85,7 @@ export default function PetForm({
         <div className="space-y-1">
           <Label htmlFor="age">Age</Label>
           <Input id="age" {...register("age")} />
-          {errors.age && (
-            <p className="text-red-500">{errors.age.message}</p>
-          )}
+          {errors.age && <p className="text-red-500">{errors.age.message}</p>}
         </div>
 
         <div className="space-y-1">
