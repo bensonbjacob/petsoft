@@ -52,7 +52,7 @@ export const nextAuthEdgeConfig = {
     jwt: async ({ token, user, trigger }) => {
       if (user) {
         // on sign in
-        token.userId = user.id;
+        token.userId = user.id as string;
         token.email = user.email!;
         token.hasAccess = user.hasAccess;
       }
