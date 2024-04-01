@@ -6,10 +6,10 @@ import PetList from "@/components/pet-list";
 import SearchForm from "@/components/search-form";
 import Stats from "@/components/stats";
 
-export default async function Dashboard() {
+export default async function Page() {
   return (
     <main>
-      <div className="flex justify-between items-center text-white py-8">
+      <div className="flex items-center justify-between text-white py-8">
         <Branding />
 
         <Stats />
@@ -23,6 +23,7 @@ export default async function Dashboard() {
         <div className="relative md:row-start-2 md:row-span-full md:col-start-1 md:col-span-1">
           <ContentBlock>
             <PetList />
+
             <div className="absolute bottom-4 right-4">
               <PetButton actionType="add" />
             </div>
